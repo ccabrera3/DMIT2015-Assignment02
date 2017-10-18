@@ -1,0 +1,62 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Northwind - Products" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<h1>List of Products</h1>
+				<b:messages id="messages"></b:messages>	
+		<h:form>
+			<b:dataTable value="#{productController.products}" var="product">
+				<b:dataTableColumn value="#{product.productID}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{product.productName}">
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+				<f:facet name="header">Unit Price</f:facet>
+				<h:outputText value="#{product.unitPrice}">
+					<f:convertNumber type="currency"/>
+				</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{product.quantityPerUnit}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{product.supplier.companyName}">
+				</b:dataTableColumn>
+				
+				
+				<b:dataTableColumn value="#{product.productName}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}">
+				<f:facet name="header">Discontinued</f:facet>
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="productDetail.xhtml">
+						<f:param name="id" value="#{product.productID}"></f:param>
+						view detail
+					</b:navCommandLink>
+				</b:dataTableColumn>
+			</b:dataTable>
+			</h:form>
+		
+				
+	</ui:define>
+
+</ui:composition>

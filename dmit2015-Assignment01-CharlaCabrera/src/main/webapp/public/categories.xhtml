@@ -1,0 +1,51 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Northwind - Categories" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<h1>List of Categories</h1>
+				<b:messages id="messages"></b:messages>	
+		<h:form>
+			<b:dataTable value="#{categoryController.categories}" var="category">
+				<b:dataTableColumn value="#{category.categoryID}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{category.description}">
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+				<o:graphicImage value="#{category.picture}" dataURI="true"/>
+				<f:facet name ="header">Picture</f:facet>
+				</b:dataTableColumn>	
+				
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="productsbyCategory.xhtml">
+						view products
+						<f:param name="id" value="#{category.categoryID}" />
+						<f:param name="categoryName" value="#{category.categoryName}" />						
+					</b:navCommandLink>	
+				</b:dataTableColumn>
+						
+			</b:dataTable>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>
