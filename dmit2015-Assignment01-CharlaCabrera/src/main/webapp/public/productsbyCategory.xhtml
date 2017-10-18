@@ -49,11 +49,10 @@
 				<b:dataTableColumn value="#{product.quantityPerUnit}">
 				</b:dataTableColumn>
 				<b:dataTableColumn value="#{product.supplier.companyName}">
+				<f:facet name="header">Supplier</f:facet>
 				</b:dataTableColumn>
 				
-				
-				<b:dataTableColumn value="#{product.productName}">
-				</b:dataTableColumn>
+			
 				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}">
 				<f:facet name="header">Discontinued</f:facet>
 				</b:dataTableColumn>	

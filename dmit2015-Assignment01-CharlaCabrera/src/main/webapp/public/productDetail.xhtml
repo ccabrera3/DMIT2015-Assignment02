@@ -32,10 +32,12 @@
 			<b:panel collapsible="false" 
 			rendered="#{productController.currentSelectedProduct != null}">
 				<f:facet name="header">Product Detail</f:facet>
-				<b:inputText label="Product ID" 
-					value="#{productController.currentSelectedProduct.productID}" 
-					readonly="true" />
-				<b:inputText label="Product Name" 
+				
+				<h:outputLabel value="Product ID: " />
+				<h:outputText value="#{productController.currentSelectedProduct.productID}" readonly="true" />
+				
+				<h:outputLabel value="Product Name: " />
+				<h:outputText
 					value="#{productController.currentSelectedProduct.productName}" 
 					readonly="true" />
 
