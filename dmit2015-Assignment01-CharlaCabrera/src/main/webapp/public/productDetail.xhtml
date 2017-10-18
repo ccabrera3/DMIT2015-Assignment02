@@ -29,20 +29,58 @@
 		<b:messages id="messages" />
 	
 		<b:form id="productForm">
-			<b:panel collapsible="false" 
+			<b:panelGrid columns="2" cellpadding="1" cellspacing="1" style="width: 20%" collapsible="false" 
 			rendered="#{productController.currentSelectedProduct != null}">
 				<f:facet name="header">Product Detail</f:facet>
 				
 				<h:outputLabel value="Product ID: " />
-				<h:outputText value="#{productController.currentSelectedProduct.productID}" readonly="true" />
+				<h:outputText value=" #{productController.currentSelectedProduct.productID}" readonly="true" />
+				
 				
 				<h:outputLabel value="Product Name: " />
 				<h:outputText
-					value="#{productController.currentSelectedProduct.productName}" 
+					value=" #{productController.currentSelectedProduct.productName}" 
 					readonly="true" />
+				<h:outputLabel value="Supplier: " />
+				<h:outputText
+					value=" #{productController.currentSelectedProduct.supplier.companyName}" 
+					readonly="true" />
+					
+				<h:outputLabel value="Category: " />
+				<h:outputText
+					value=" #{productController.currentSelectedProduct.category.categoryName}" 
+					readonly="true" />
+					
+				<h:outputLabel value="Quantity per unit: " />
+				<h:outputText
+					value=" #{productController.currentSelectedProduct.quantityPerUnit}" 
+					readonly="true" />
+					
+				<h:outputLabel value="Unit Price: " />
+				<h:outputText value=" #{productController.currentSelectedProduct.unitPrice}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
+					
+				<h:outputLabel value="Units in Stock: " />
+				<h:outputText
+					value=" #{productController.currentSelectedProduct.unitsInStock}" 
+					readonly="true" />
+					
+				<h:outputLabel value="Reorder Level: " />
+				<h:outputText
+					value=" #{productController.currentSelectedProduct.reorderLevel}" 
+					readonly="true" />
+					
+				<h:outputLabel value="Discontinued: " />
+				<h:selectBooleanCheckbox 
+				value=" #{(productController.currentSelectedProduct.discontinued == 0) ? 'false' : 'true'}" 
+				readonly="true"/>
+					
+					
+					
 
 					
-			</b:panel>
+			</b:panelGrid>
 		</b:form>	
 	
 				

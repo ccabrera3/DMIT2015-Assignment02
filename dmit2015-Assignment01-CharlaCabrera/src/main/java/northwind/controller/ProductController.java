@@ -25,7 +25,7 @@ public class ProductController {
 					Messages.addGlobalInfo("There is no product with productID {0}", 
 							currentSelectedProductId);
 				} else {
-					Messages.addGlobalInfo("Successfully retreived product info.");
+					Messages.addGlobalInfo("Successfully retrieved product info.");
 				}
 			} else {
 				Messages.addGlobalError("Bad request. A valid ProductID is required.");
