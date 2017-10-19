@@ -56,6 +56,14 @@
 				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}">
 				<f:facet name="header">Discontinued</f:facet>
 				</b:dataTableColumn>	
+				
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="productDetail.xhtml">
+						<f:param name="id" value="#{product.productID}"></f:param>
+						view detail
+					</b:navCommandLink>
+				</b:dataTableColumn>
 			</b:dataTable>
 		</h:form>
 		

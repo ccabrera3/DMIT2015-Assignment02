@@ -57,7 +57,7 @@
 					readonly="true" />
 					
 				<h:outputLabel value="Unit Price: " />
-				<h:outputText value=" #{productController.currentSelectedProduct.unitPrice}">
+				<h:outputText value="#{productController.currentSelectedProduct.unitPrice}">
 					<f:convertNumber type="currency" />
 				</h:outputText>
 					
@@ -72,13 +72,9 @@
 					readonly="true" />
 					
 				<h:outputLabel value="Discontinued: " />
-				<h:selectBooleanCheckbox 
-				value=" #{(productController.currentSelectedProduct.discontinued == 0) ? 'false' : 'true'}" 
-				readonly="true"/>
+				<h:selectBooleanCheckbox
+				value="#{(productController.currentSelectedProduct.discontinued == 0) ? 'false' : 'true' }" readonly="true"/>
 					
-					
-					
-
 					
 			</b:panelGrid>
 		</b:form>	

@@ -51,6 +51,14 @@
 					<f:convertNumber type="currency"/>
 				</h:outputText>
 				</b:dataTableColumn>
+				
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="orderDetails.xhtml">
+						<f:param name="id" value="#{order.orderID}"></f:param>
+						view detail
+					</b:navCommandLink>
+				</b:dataTableColumn>
 								
 			</b:dataTable>
 			

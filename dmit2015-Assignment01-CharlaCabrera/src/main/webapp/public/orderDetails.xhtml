@@ -1,0 +1,144 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Northwind - Orders" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+	<f:metadata>
+			<f:viewParam name="id" value="#{orderController.currentSelectedOrderId}" />
+			<f:event listener="#{orderController.findOrder()}" type="preRenderView" />
+		</f:metadata>
+		<h1>Sales Invoice</h1>
+		<b:messages id="messages"></b:messages>	
+		<h:form>
+			<b:panelGrid columns="2" cellpadding="1" cellspacing="1" style="width: 100%" collapsible="false" 
+			rendered="#{orderController.currentSelectedOrder != null}">
+			
+			<b:panel title="Billing Address" title-style="color:red">
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.companyName}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.contactName}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.contactTitle}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.address}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.city} 
+			#{orderController.currentSelectedOrder.customer.postalCode}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.country}" readonly="true" /><br></br>
+			</b:panel>
+			
+			
+			<b:panel title="Shipping Address" title-style="color:red">
+			<h:outputText value=" #{orderController.currentSelectedOrder.customer.companyName}" readonly="true" /><br></br>
+			
+			<h:outputText value=" #{orderController.currentSelectedOrder.shipAddress}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.shipCity} #{orderController.currentSelectedOrder.customer.postalCode}" readonly="true" /><br></br>
+			<h:outputText value=" #{orderController.currentSelectedOrder.shipCountry}" readonly="true" /><br></br>
+			</b:panel>			
+			</b:panelGrid>
+			
+			
+			
+			
+			
+			
+			
+			<b:panel title="Invoice Detail" title-style="color:red" collapsible="false" 
+			rendered="#{orderController.currentSelectedOrder != null}">
+			<b:panelGrid columns="2" cellpadding="1" cellspacing="1" style="width: 100%">
+			<b:inputText label="Customer ID" 
+					value="#{orderController.currentSelectedOrder.customer.customerID}" 
+					readonly="true" />
+			<b:inputText label="Order ID" 
+					value="#{orderController.currentSelectedOrder.orderID}" 
+					readonly="true" />
+			</b:panelGrid>
+			
+			
+			<b:panelGrid columns="4" cellpadding="1" cellspacing="1" style="width: 100%">		
+			<b:inputText label="Order Date" 
+					value="#{orderController.currentSelectedOrder.orderDate}" 
+					readonly="true">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+					</b:inputText>
+			<b:inputText label="Required Date" 
+					value="#{orderController.currentSelectedOrder.requiredDate}" 
+					readonly="true">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+					</b:inputText>
+					
+			<b:inputText label="Shipped Date" 
+					value="#{orderController.currentSelectedOrder.shippedDate}" 
+					readonly="true">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+					</b:inputText>
+					
+			<b:inputText label="Ship Via" 
+					value="#{orderController.currentSelectedOrder.shipper.companyName}" 
+					readonly="true" />
+						
+			</b:panelGrid>
+			
+			<b:panelGrid columns="1" cellpadding="1" cellspacing="1" style="width: 100%">
+			<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="order">
+				<b:dataTableColumn value="#{order.id}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{order.product}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{order.quantity}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{order.discount}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{order.unitPrice}">
+				</b:dataTableColumn>
+				djfkhdskjfhdskljISTOPPED HERE
+				<b:dataTableColumn>
+				<f:facet name="header">Unit Price</f:facet>
+				<h:outputText value="#{product.unitPrice}">
+					<f:convertNumber type="currency"/>
+				</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{product.quantityPerUnit}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{product.supplier.companyName}">
+				</b:dataTableColumn>
+				
+				
+				<b:dataTableColumn value="#{product.productName}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}">
+				<f:facet name="header">Discontinued</f:facet>
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="productDetail.xhtml">
+						<f:param name="id" value="#{product.productID}"></f:param>
+						view detail
+					</b:navCommandLink>
+				</b:dataTableColumn>
+			</b:dataTable>
+			
+			</b:panelGrid>
+			
+			</b:panel>
+													
+			
+		</h:form>
+				
+	</ui:define>
+
+</ui:composition>
