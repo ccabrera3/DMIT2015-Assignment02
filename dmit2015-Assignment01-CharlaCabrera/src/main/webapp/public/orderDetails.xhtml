@@ -95,42 +95,55 @@
 			
 			<b:panelGrid columns="1" cellpadding="1" cellspacing="1" style="width: 100%">
 			<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="order">
-				<b:dataTableColumn value="#{order.id}">
+				<b:dataTableColumn value="#{order.id.productID}">
 				</b:dataTableColumn>
-				<b:dataTableColumn value="#{order.product}">
+				<b:dataTableColumn value="#{order.product.productName}">
 				</b:dataTableColumn>
 				<b:dataTableColumn value="#{order.quantity}">
 				</b:dataTableColumn>
-				<b:dataTableColumn value="#{order.discount}">
-				</b:dataTableColumn>
-				<b:dataTableColumn value="#{order.unitPrice}">
-				</b:dataTableColumn>
-				djfkhdskjfhdskljISTOPPED HERE
+				
 				<b:dataTableColumn>
-				<f:facet name="header">Unit Price</f:facet>
-				<h:outputText value="#{product.unitPrice}">
+				<f:facet name="header">Discount</f:facet>
+				<h:outputText value="#{order.discount}">
+					<f:convertNumber type="percent"/>
+				</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+				<f:facet name="header">Freight</f:facet>
+				<h:outputText value="#{order.unitPrice}">
 					<f:convertNumber type="currency"/>
 				</h:outputText>
 				</b:dataTableColumn>
-				<b:dataTableColumn value="#{product.quantityPerUnit}">
-				</b:dataTableColumn>
-				<b:dataTableColumn value="#{product.supplier.companyName}">
-				</b:dataTableColumn>
-				
-				
-				<b:dataTableColumn value="#{product.productName}">
-				</b:dataTableColumn>
-				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}">
-				<f:facet name="header">Discontinued</f:facet>
-				</b:dataTableColumn>
 				<b:dataTableColumn>
-					<f:facet name="header">Action</f:facet>
-					<b:navCommandLink outcome="productDetail.xhtml">
-						<f:param name="id" value="#{product.productID}"></f:param>
-						view detail
-					</b:navCommandLink>
+					<f:facet name="header">Extended Price</f:facet>
+					<h:outputText value="#{order.unitPrice * order.quantity}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
 				</b:dataTableColumn>
 			</b:dataTable>
+			
+			</b:panelGrid>
+			
+			<b:panelGrid columns="3" cellpadding="1" cellspacing="1" style="width: 100%">
+			
+			<b:inputText label="Sub Total" 
+					value="#{orderController.findSubTotal()}" 
+					readonly="true">
+					<f:convertNumber type="currency" /> 
+					</b:inputText>
+					
+			<b:inputText label="Freight" 
+					value="#{orderController.currentSelectedOrder.freight}" 
+					readonly="true">
+					<f:convertNumber type="currency" /> 
+					</b:inputText>
+					
+			<b:inputText label="Sales Total" 
+					value="#{orderController.findTotal()}" 
+					readonly="true">
+					<f:convertNumber type="currency" /> 
+					</b:inputText>
+			
 			
 			</b:panelGrid>
 			

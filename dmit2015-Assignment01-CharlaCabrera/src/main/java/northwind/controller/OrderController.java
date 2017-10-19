@@ -1,10 +1,12 @@
 package northwind.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.BigDecimalConverter;
 import javax.inject.Inject;
 
 import org.omnifaces.util.Messages;
@@ -58,12 +60,21 @@ public class OrderController {
 		return currentSelectedOrder;
 	}
 	
-	public double findSubTotal() {
+	public BigDecimal findSubTotal() {
 		double subtotal = 0;
 		for(OrderDetail od :currentSelectedOrder.getOrderDetails()) {
 			subtotal += od.getUnitPrice().doubleValue() * od.getQuantity();
 		}
-		return subtotal;
+		return BigDecimal.valueOf(subtotal);
+	}
+	
+	public double findTotal() {
+		double subtotal = 0;
+		for(OrderDetail od :currentSelectedOrder.getOrderDetails()) {
+			subtotal += od.getUnitPrice().doubleValue() * od.getQuantity();
+		}
+		double total = subtotal + currentSelectedOrder.getFreight().doubleValue();
+		return total;
 	}
 
 }
