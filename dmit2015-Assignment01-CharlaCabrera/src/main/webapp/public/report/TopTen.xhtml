@@ -1,0 +1,70 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:hf="http://highfaces.org" 
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="NorthWind - Top Ten" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<b:jumbotron>
+			<h1>Ten Most Expensive Products</h1>
+		</b:jumbotron>
+		
+		<h:form>
+			<b:dataTable value="#{productController.retrieveTopTen()}" var="topten">
+				<b:dataTableColumn value="#{topten.productName}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn>
+					<f:facet name="header">Unit Price</f:facet>
+					<h:outputText value="#{topten.unitPrice}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
+				</b:dataTableColumn>
+				
+						
+			</b:dataTable>
+			
+		</h:form>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				
+	</ui:define>
+
+</ui:composition>

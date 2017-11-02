@@ -38,6 +38,13 @@ public class ProductController {
 	
 	private List<Product> products;
 	
+	//CALLING OUT THE REPORT
+	
+	public List <Product> retrieveTopTen() {
+		return productRepository.findTopTenProducts();
+	}
+	//END REPORT
+	
 	@PostConstruct
 	void init() {
 		products = productRepository.findAll();
@@ -90,6 +97,8 @@ public class ProductController {
 	public Product getCurrentSelectedProduct() {
 		return currentSelectedProduct;
 	}
+	
+
 	
 
 }
