@@ -1,0 +1,67 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:hf="http://highfaces.org" 
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Category Sales" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		
+		<hf:chart type="pie" title="Category Sales">
+			<hf:chartSerie 
+				name="Total Sales"
+				value="#{categoryController.retrieveCategoriesSales()}"
+				var="point"
+				point="#{point.totalSales}"
+				tickLabel="#{point.categoryName}"
+				dataLabel="{point.name} ({point.percentage:.1f} %) ({point.y})" />
+		</hf:chart>
+			<br/>
+			<br/>
+		<hf:chart type="bar" title="Category Sales for 1997" xaxisLabel="Category" yaxisLabel="Sales Amount"> 
+			<hf:chartSerie 
+			name="Category Sales"
+			value="#{categoryController.retrieveCategoriesSales()}"
+			var="point"
+     		point="#{point.totalSales}"  
+     		tickLabel="#{point.categoryName}"
+     		dataLabel="({point.y})">
+			</hf:chartSerie>
+		</hf:chart>
+			<br/>
+			<br/>
+		<hf:chart type="column" title="Category Sales for 1997" xaxisLabel="Category" yaxisLabel="Sales Amount"
+		
+		>
+		<hf:chartSerie
+			name="Category Sales"
+			value="#{categoryController.retrieveCategoriesSales()}"
+			var="point"
+     		point="#{point.totalSales}"  
+     		tickLabel="#{point.categoryName}"
+     		dataLabel="({point.y})"/>
+			<hf:chartAxis position="s" tickAngle="-45"></hf:chartAxis>
+			
+		</hf:chart>
+			
+				
+	</ui:define>
+
+</ui:composition>

@@ -1,12 +1,12 @@
 package northwind.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.BigDecimalConverter;
 import javax.inject.Inject;
 
 import org.omnifaces.util.Messages;
@@ -14,6 +14,7 @@ import org.omnifaces.util.Messages;
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
+import northwind.report.MonthlySalesReport;
 @Model
 public class OrderController {
 	
@@ -76,5 +77,20 @@ public class OrderController {
 		double total = subtotal + currentSelectedOrder.getFreight().doubleValue();
 		return total;
 	}
+	
+	//FOR REPORT
+	
+	public List<MonthlySalesReport> retrieveMonthlySales(int year)
+	{
+		//CREATE FOR-EACH MONTH CODE
+		List<MonthlySalesReport> allMonthYearSales = new ArrayList<MonthlySalesReport>();
+		for (int month = 1; month <= 12; month++ ) {
+			MonthlySalesReport report = new MonthlySalesReport(month, orderRepository.findMonthlySales(year, month));
+			allMonthYearSales.add(report);
+		}
+		return allMonthYearSales;
+		
+	}
+	
 
 }
