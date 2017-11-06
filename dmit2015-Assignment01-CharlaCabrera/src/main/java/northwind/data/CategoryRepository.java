@@ -19,6 +19,7 @@ public class CategoryRepository extends AbstractJpaRepository<Category> {
 		.setParameter("yearValue",1997)
 		.getResultList();
 	}
+	//set as 1997 because of requirement (category sales on year 1997)
 	
 
 }

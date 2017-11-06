@@ -29,7 +29,7 @@
 				name="Total Sales"
 				value="#{categoryController.retrieveCategoriesSales()}"
 				var="point"
-				point="#{point.totalSales}"
+				point="#{point.totalCategorySales}"
 				tickLabel="#{point.categoryName}"
 				dataLabel="{point.name} ({point.percentage:.1f} %) ({point.y})" />
 		</hf:chart>
@@ -40,25 +40,23 @@
 			name="Category Sales"
 			value="#{categoryController.retrieveCategoriesSales()}"
 			var="point"
-     		point="#{point.totalSales}"  
+     		point="#{point.totalCategorySales}"  
      		tickLabel="#{point.categoryName}"
-     		dataLabel="({point.y})">
-			</hf:chartSerie>
+     		dataLabel="{point.y}"/>
 		</hf:chart>
-			<br/>
-			<br/>
-		<hf:chart type="column" title="Category Sales for 1997" xaxisLabel="Category" yaxisLabel="Sales Amount"
 		
-		>
+			<br/>
+			<br/>
+			
+		<hf:chart type="column" title="Category Sales for 1997" xaxisLabel="Category" yaxisLabel="Sales Amount" >
 		<hf:chartSerie
 			name="Category Sales"
 			value="#{categoryController.retrieveCategoriesSales()}"
 			var="point"
-     		point="#{point.totalSales}"  
+     		point="#{point.totalCategorySales}"  
      		tickLabel="#{point.categoryName}"
-     		dataLabel="({point.y})"/>
-			<hf:chartAxis position="s" tickAngle="-45"></hf:chartAxis>
-			
+     		dataLabel="{point.y}"/>
+
 		</hf:chart>
 			
 				

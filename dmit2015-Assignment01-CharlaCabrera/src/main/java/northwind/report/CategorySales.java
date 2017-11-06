@@ -6,19 +6,19 @@ import java.math.RoundingMode;
 public class CategorySales {
 
 		private String categoryName;
-		private BigDecimal totalSales; 
+		private BigDecimal totalCategorySales; 
 		
 		
-		public CategorySales(String categoryName, BigDecimal totalSales) {
+		public CategorySales(String categoryName, BigDecimal totalCategorySales) {
 			super();
 			this.categoryName = categoryName;
-			this.totalSales = totalSales;
+			this.totalCategorySales = totalCategorySales;
 		}
 		
-		public CategorySales(String categoryName, double totalSales) {
+		public CategorySales(String categoryName, double totalCategorySales) {
 			super();
 			this.categoryName = categoryName;
-			this.totalSales = BigDecimal.valueOf(totalSales).setScale(2, RoundingMode.HALF_UP);
+			this.totalCategorySales = BigDecimal.valueOf(totalCategorySales).setScale(2, RoundingMode.HALF_UP);
 		}
 
 		public String getCategoryName() {
@@ -29,12 +29,12 @@ public class CategorySales {
 			this.categoryName = categoryName;
 		}
 
-		public BigDecimal getTotalSales() {
-			return totalSales;
+		public BigDecimal gettotalCategorySales() {
+			return totalCategorySales;
 		}
 
-		public void setTotalSales(BigDecimal totalSales) {
-			this.totalSales = totalSales;
+		public void settotalCategorySales(BigDecimal totalCategorySales) {
+			this.totalCategorySales = totalCategorySales;
 		}
 	
 

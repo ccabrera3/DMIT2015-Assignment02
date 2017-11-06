@@ -39,11 +39,7 @@ public class MonthlySalesReport {
 			this.yearsales = yearsales;
 		}
 		
-		
-		@Override
-		public String toString() {
-			return "allMonthYearSales [orderMonth=" + month + ", yearsales=" + yearsales + "]";
-		}
+
 
 
 	
