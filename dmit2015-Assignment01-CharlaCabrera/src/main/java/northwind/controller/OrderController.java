@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
@@ -17,7 +18,7 @@ import northwind.model.OrderDetail;
 import northwind.report.MonthlySalesReport;
 @Model
 public class OrderController {
-	
+	@NotNull(message="Order ID field value is required")
 	private int currentSelectedOrderId;		// getter/setter
 	private Order currentSelectedOrder;		// getter
 	
@@ -33,6 +34,16 @@ public class OrderController {
 				Messages.addGlobalError("Bad request. Invalid invoiceID {0}", currentSelectedOrderId);
 			}
 		}
+	}
+	
+	public void findOneOrder() {
+		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
+		if(currentSelectedOrder == null){
+			Messages.addGlobalInfo("There is no invoice with Order ID {0}", currentSelectedOrderId);					
+		} else {
+			Messages.addGlobalInfo("We found 1 result with OrderID {0}", currentSelectedOrderId);								
+		}
+		
 	}
 	
 	@Inject
