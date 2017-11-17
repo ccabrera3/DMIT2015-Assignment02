@@ -1,0 +1,57 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:hf="http://highfaces.org" 
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Northwind - Create Category" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		
+				
+		<b:jumbotron>
+			<h2>New Category Details</h2>
+		</b:jumbotron>
+		<b:messages id="messages" />
+				
+		<b:form enctype="multipart/form-data">
+			<b:inputText id="categoryName" placeholder="enter new category name" label="Category Name"
+				value="#{categoryController.categoryName}">
+				<f:validateLength minimum="3" maximum="15" />
+				
+				</b:inputText>
+				
+				<h:message for="categoryName" style="color:red" />
+			
+			<b:inputTextarea id="description" placeholder="enter description of category" label="Description" 
+				value="#{categoryController.description}"/>
+				
+			<h:outputLabel value="Picture" for="picture" />
+			<o:inputFile id="picture" value="#{categoryController.uploadedFile}" /> 
+			<br/>
+			
+			<b:commandButton value="Submit"
+				actionListener="#{categoryController.createNewCategory()}"
+				ajax="true" update="messages categoryName"
+				look="primary" />				
+		</b:form>
+				
+	</ui:define>
+
+</ui:composition>
