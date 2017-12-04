@@ -38,10 +38,10 @@
 			<b:panel id="selectCustomer" title="Step 1: Select Customer" span="12">
 				<b:row>
 					<b:column span="12">
-						<b:selectOneMenu id="customerlist" label="Customer" value="#{POSController.currentCustomer}" update="customerpanel orderForm"
+						<b:selectOneMenu id="customerlist" label="Customer" value="#{POSController.currentCustomer}" update="selectCustomer orderForm"
 												onchange="ajax:POSController.changeShippingInfo()" >
 						<f:selectItem itemLabel="Choose Customer" itemValue="" noSelectionOption="true" />
-						<f:selectItems value="#{customerController.customers}" 
+						<f:selectItems value="#{CustomerController.customers}" 
 							var="customer"
 							itemLabel="#{customer.companyName}"
 							itemValue="#{customer}" />
@@ -146,7 +146,7 @@
 								<b:commandButton icon="trash" value="delete"
 									look="danger"
 									immediate="true"
-									actionListener="#{pOSController.removeProduct(singleItem)}"
+									actionListener="#{POSController.removeProduct(singleItem)}"
 									ajax="true"
 									update="productForm, messages">							
 								</b:commandButton>
@@ -168,7 +168,7 @@
 					<b:column span="12">
 						<b:selectOneMenu id="employeelist" value="#{POSController.currentEmployee}" label="Employee">
 							<f:selectItem itemLabel="Choose Employee" itemValue="" noSelectionOption="true" />
-							<f:selectItems value="#{employeeController.employees}" 
+							<f:selectItems value="#{EmployeeController.employees}" 
 								var="employee"
 								itemLabel="#{employee.lastName}, #{employee.firstName}"
 								itemValue="#{employee}" />
