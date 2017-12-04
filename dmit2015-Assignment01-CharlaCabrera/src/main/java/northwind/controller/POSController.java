@@ -60,10 +60,10 @@ public class POSController implements Serializable {
 	
 
 
-	public void changeShippingInfo() { 
+	public void changeShippingDetails() { 
 		
 		if (currentCustomer == null) {
-			Messages.addGlobalWarn("Must choose a customer to have the same shipping info.");
+			Messages.addGlobalWarn("Please choose a customer");
 			
 		} else if (shippingAddressCheckbox == true) {
 			
@@ -93,10 +93,10 @@ public class POSController implements Serializable {
 			currentDetail.setQuantity((short)1);
 	
 			if (details.add(currentDetail)) {
-				Messages.addGlobalInfo("Add product to cart successful.");
+				Messages.addGlobalInfo("Product added successfully");
 				currentProductId = null;
 			} else {
-				Messages.addGlobalInfo("Product is already in cart");
+				Messages.addGlobalInfo("Product exists in cart");
 				currentProductId = null;
 			}
 			
@@ -148,7 +148,7 @@ public class POSController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 			
 		} catch(Exception e) {
-			Messages.addGlobalError("Order creation was not successful");
+			Messages.addGlobalError("Error: Order Creation unsuccessful");
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
@@ -158,7 +158,7 @@ public class POSController implements Serializable {
 	public void removeProduct(OrderDetail currentProduct) {
 		details.remove(currentProduct);
 		currentProductId = null;
-		Messages.addGlobalInfo("Product is removed successfully");
+		Messages.addGlobalInfo("Product Deleted");
 	}
 	
 	public void clearCart() { 
@@ -272,11 +272,11 @@ public class POSController implements Serializable {
 	}
 
 	
-	public boolean getShippingCheckBox() {
+	public boolean getShippingAddressCheckBox() {
 		return shippingAddressCheckbox;
 	}
 
-	public void setShippingCheckBox(boolean shippingAddressCheckbox) {
+	public void setShippingAddressCheckBox(boolean shippingAddressCheckbox) {
 		this.shippingAddressCheckbox = shippingAddressCheckbox;
 	}
 

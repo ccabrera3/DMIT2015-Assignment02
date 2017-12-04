@@ -14,7 +14,7 @@
 	xmlns:hf="http://highfaces.org" 
 	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
 	
-	<ui:param name="title" value="Northwind Point of Sales System" />
+	<ui:param name="title" value="[put page title here]" />
 	
 	<ui:define name="externalstyles">
 	</ui:define>
@@ -24,22 +24,20 @@
 
 	<ui:define name="maincontent">
 		
-			
-			<b:jumbotron>
-			
-				<h1>Point of Sales</h1>
+				
+		<b:jumbotron>
+			<h1>Place Order</h1>
+		</b:jumbotron>
 		
-			</b:jumbotron>
-			
-			<b:messages id="messages" />
-			
-				<b:form id="customerForm">
+		<b:messages id="messages" />
 		
-			<b:panel id="selectCustomer" title="Step 1: Select Customer" span="12">
+		<b:form id="customerForm">
+		
+			<b:panel id="customerpanel" title="Step 1: Select Customer" span="12">
 				<b:row>
 					<b:column span="12">
-						<b:selectOneMenu id="customerlist" label="Customer" value="#{pOSController.currentCustomer}" update="selectCustomer orderForm"
-												onchange="ajax:#{pOSController.changeShippingDetails()}" >
+						<b:selectOneMenu id="customerlist" label="Customer" value="#{cartController.currentCustomer}" update="customerpanel orderForm"
+												onchange="ajax:cartController.changeShippingDetails()" >
 						<f:selectItem itemLabel="Choose Customer" itemValue="" noSelectionOption="true" />
 						<f:selectItems value="#{customerController.customers}" 
 							var="customer"
@@ -51,43 +49,43 @@
 				
 				<b:row>
 					<b:column span="12">
-						<b:panel id="customerdetails" rendered="#{not empty pOSController.currentCustomer}" 
+						<b:panel id="customerdetails" rendered="#{not empty cartController.currentCustomer}" 
 										title="Customer Details" collapsible="false">
 							<b:panelGrid colSpans="2,10">
 						
 						
 							    <h:outputLabel value="CustomerID: " />
-								<h:outputText value="#{pOSController.currentCustomer.customerID}" /> 
+								<h:outputText value="#{cartController.currentCustomer.customerID}" /> 
 								
 								<h:outputLabel value="Company Name: " />
-								<h:outputText value="#{pOSController.currentCustomer.companyName}" /> 
+								<h:outputText value="#{cartController.currentCustomer.companyName}" /> 
 								
 								<h:outputLabel value="Contact Name: " />
-								<h:outputText value="#{pOSController.currentCustomer.contactName}" /> 
+								<h:outputText value="#{cartController.currentCustomer.contactName}" /> 
 								
 								<h:outputLabel value="Contact Title: " />
-								<h:outputText value="#{pOSController.currentCustomer.contactTitle}" /> 
+								<h:outputText value="#{cartController.currentCustomer.contactTitle}" /> 
 								
 								<h:outputLabel value="Address: " />
-								<h:outputText value="#{pOSController.currentCustomer.address}" /> 
+								<h:outputText value="#{cartController.currentCustomer.address}" /> 
 								
 								<h:outputLabel value="City: " />
-								<h:outputText value="#{pOSController.currentCustomer.city}" /> 
+								<h:outputText value="#{cartController.currentCustomer.city}" /> 
 								
 								<h:outputLabel value="Region: " />
-								<h:outputText value="#{pOSController.currentCustomer.region}" />
+								<h:outputText value="#{cartController.currentCustomer.region}" />
 								
 								<h:outputLabel value="Postal Code: " />
-								<h:outputText value="#{pOSController.currentCustomer.postalCode}" />
+								<h:outputText value="#{cartController.currentCustomer.postalCode}" />
 								
 								<h:outputLabel value="Country: " />
-								<h:outputText value="#{pOSController.currentCustomer.country}" />
+								<h:outputText value="#{cartController.currentCustomer.country}" />
 								
 								<h:outputLabel value="Phone: " />
-								<h:outputText value="#{pOSController.currentCustomer.phone}" />
+								<h:outputText value="#{cartController.currentCustomer.phone}" />
 								
 								<h:outputLabel value="Fax: " />
-								<h:outputText value="#{pOSController.currentCustomer.fax}" />
+								<h:outputText value="#{cartController.currentCustomer.fax}" />
 								</b:panelGrid>
 							</b:panel>
 					</b:column>
@@ -100,45 +98,22 @@
 			
 			
 			<p:outputPanel id="productoutput">
-				<b:panel id="productpanel" title="Step 2: Add Products" span="12">
-					<b:row>
-						<b:column span="3">	
-							<b:inputText id="productId" 
-										label="Product ID "
-										inline="true"
-										value="#{pOSController.currentProductId}">
-										<b:focus />
-							</b:inputText>
-						</b:column>
-						
-						<b:column span="2">	
-							<b:commandButton value="Add to Cart" look="primary" ajax="false"
-										 actionListener="#{pOSController.addProductToCart()}" />
-						</b:column>
-						
-					</b:row>
-					
-					<b:row>
-						<b:column span="12">
-							<b:dataTable id="cartTable" value="#{pOSController.details}" var="singleItem" class="cartTable" 
-											rendered="#{not empty pOSController.details}">
+				<b:panel id="productpanel" title="Step 2: Shopping Cart" span="12">
+							<b:dataTable id="cartTable" value="#{cartController.details}" var="singleItem" class="cartTable" 
+											rendered="#{not empty cartController.details}">
 							
 							<b:dataTableColumn label="Product ID" value="#{singleItem.product.productID}" />
 									
 							<b:dataTableColumn label="ProductName" value="#{singleItem.product.productName}" />
 							
-							<b:dataTableColumn label="Qty">
-								<b:inputText value="#{singleItem.quantity}" size="2" update="@(.cartTable)">
-								</b:inputText>
+							<b:dataTableColumn label="Qty" value="#{singleItem.quantity}">
 							</b:dataTableColumn>
 							
 							
 							<b:dataTableColumn label="Unit Price" value="#{of:formatCurrency(singleItem.unitPrice, '$')}" styleClass="text-right">
 							</b:dataTableColumn>
 							
-							<b:dataTableColumn label="Product Total" 
-							value="#{of:formatCurrency(singleItem.unitPrice * singleItem.quantity, '$')}" 
-							styleClass="text-right">
+							<b:dataTableColumn label="Product Total" value="#{of:formatCurrency(singleItem.unitPrice * singleItem.quantity, '$')}" styleClass="text-right">
 							</b:dataTableColumn> 
 							
 							
@@ -146,15 +121,13 @@
 								<b:commandButton icon="trash" value="delete"
 									look="danger"
 									immediate="true"
-									actionListener="#{pOSController.removeProduct(singleItem)}"
+									actionListener="#{cartController.removeProduct(singleItem)}"
 									ajax="true"
 									update="productForm, messages">							
 								</b:commandButton>
 							</b:dataTableColumn>
 							
 							</b:dataTable>
-						</b:column>
-					</b:row>
 				</b:panel>
 			</p:outputPanel>
 			
@@ -166,7 +139,7 @@
 				
 				<b:row>
 					<b:column span="12">
-						<b:selectOneMenu id="employeelist" value="#{pOSController.currentEmployee}" label="Employee">
+						<b:selectOneMenu id="employeelist" value="#{cartController.currentEmployee}" label="Employee">
 							<f:selectItem itemLabel="Choose Employee" itemValue="" noSelectionOption="true" />
 							<f:selectItems value="#{employeeController.employees}" 
 								var="employee"
@@ -175,10 +148,10 @@
 						</b:selectOneMenu>
 					</b:column>
 				</b:row>
-				
+
 				<b:row>
 					<b:column span="12">
-						 <b:dateTimePicker value="#{pOSController.newRequiredDate}" show-time="false" label="Required Date" />
+						 <b:dateTimePicker value="#{cartController.newRequiredDate}" show-time="false" label="Required Date" />
 					</b:column>
 				</b:row>
 				
@@ -188,24 +161,24 @@
 			<b:panel id="shipperpanel" title="Step 4: Shipping Info" span="12">
 				<b:row>
 					<b:column span="12">
-						<b:selectBooleanCheckbox value="#{pOSController.shippingAddressCheckBox}" 
+						<b:selectBooleanCheckbox value="#{cartController.shippingAddressCheckbox}" 
 						caption="Same as billing address" 
 						update="orderForm" 
-						onchange="ajax:#{pOSController.changeShippingDetails()}"/>
+						onchange="ajax:cartController.changeShippingDetails()"/>
 					</b:column>
                 </b:row>
 					
-					<b:inputText id="shippingName" label="Shipping Name" value="#{pOSController.shippingName}" /> <br/>
+					<b:inputText id="shippingName" label="Shipping Name" value="#{cartController.shippingName}" /> <br/>
 					
-					<b:inputText id="shippingAdress" label="Shipping Address" value="#{pOSController.shippingAddress}" /> <br/>
+					<b:inputText id="shippingAdress" label="Shipping Address" value="#{cartController.shippingAddress}" /> <br/>
 					
-					<b:inputText id="shippingCity" label="Shipping City" value="#{pOSController.shippingCity}" /> <br/>
+					<b:inputText id="shippingCity" label="Shipping City" value="#{cartController.shippingCity}" /> <br/>
 					
-					<b:inputText id="shippingRegion" label="Shipping Region" value="#{pOSController.shippingRegion}" /> <br/>
+					<b:inputText id="shippingRegion" label="Shipping Region" value="#{cartController.shippingRegion}" /> <br/>
 					
-					<b:inputText id="shippingPostal" label="Shipping Postal Code" value="#{pOSController.shippingPostal}" /> <br/>
+					<b:inputText id="shippingPostal" label="Shipping Postal Code" value="#{cartController.shippingPostal}" /> <br/>
 					
-					<b:inputText id="shippingCountry" label="Shipping Country" value="#{pOSController.shippingCountry}" /> <br/>
+					<b:inputText id="shippingCountry" label="Shipping Country" value="#{cartController.shippingCountry}" /> <br/>
 				
 				
 			 
@@ -213,7 +186,7 @@
 			
 			
 			<b:commandButton value="Place Order" look="primary" ajax="false"
-										 actionListener="#{pOSController.createNewOrder}" />
+										 actionListener="#{cartController.createNewOrder}" />
 		
 		</b:form>
 				
