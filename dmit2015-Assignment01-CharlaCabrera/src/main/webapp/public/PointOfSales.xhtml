@@ -38,14 +38,15 @@
 			<b:panel id="selectCustomer" title="Step 1: Select Customer" span="12">
 				<b:row>
 					<b:column span="12">
-						<b:selectOneMenu id="customerlist" label="Customer" value="#{pOSController.currentCustomer}" update="selectCustomer orderForm"
+						<b:selectOneMenu id="customerlist" label="Customer" value="#{pOSController.currentCustomer}" update="selectCustomer selectemployee"
 												onchange="ajax:#{pOSController.changeShippingDetails()}" >
 						<f:selectItem itemLabel="Choose Customer" itemValue="" noSelectionOption="true" />
 						<f:selectItems value="#{customerController.customers}" 
 							var="customer"
 							itemLabel="#{customer.companyName}"
 							itemValue="#{customer}" />
-					</b:selectOneMenu>
+					</b:selectOneMenu>		entityManager.persist(newOrder);
+					
 					</b:column>
 				</b:row>
 				
@@ -120,7 +121,7 @@
 					
 					<b:row>
 						<b:column span="12">
-							<b:dataTable id="cartTable" value="#{pOSController.details}" var="singleItem" class="cartTable" 
+							<b:dataTable id="ShoppingCartTable" value="#{pOSController.details}" var="singleItem" class="ShoppingCartTable" 
 											rendered="#{not empty pOSController.details}">
 							
 							<b:dataTableColumn label="Product ID" value="#{singleItem.product.productID}" />
@@ -128,7 +129,7 @@
 							<b:dataTableColumn label="ProductName" value="#{singleItem.product.productName}" />
 							
 							<b:dataTableColumn label="Qty">
-								<b:inputText value="#{singleItem.quantity}" size="2" update="@(.cartTable)">
+								<b:inputText value="#{singleItem.quantity}" size="2" update="@(.ShoppingCartTable)">
 								</b:inputText>
 							</b:dataTableColumn>
 							
@@ -161,7 +162,7 @@
 			
 		</b:form>
 		
-		<b:form id="orderForm">
+		<b:form id="selectemployee">
 			<b:panel id="orderpanel" title="Step 3: Order Info" span="12">
 				
 				<b:row>
@@ -190,7 +191,7 @@
 					<b:column span="12">
 						<b:selectBooleanCheckbox value="#{pOSController.shippingAddressCheckBox}" 
 						caption="Same as billing address" 
-						update="orderForm" 
+						update="selectemployee" 
 						onchange="ajax:#{pOSController.changeShippingDetails()}"/>
 					</b:column>
                 </b:row>

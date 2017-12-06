@@ -10,7 +10,6 @@ import northwind.model.Product;
 @Stateless
 public class ProductService {
 
-	@SuppressWarnings("cdi-ambiguous-dependency")
 	@Inject
 	private ProductRepository productRepository;
 

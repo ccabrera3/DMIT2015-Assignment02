@@ -25,7 +25,6 @@ public class OrderService {
 	private EJBContext context;
 	
 
-	@SuppressWarnings("cdi-ambiguous-dependency")
 	@Inject
 	private EntityManager entityManager;
 
@@ -46,12 +45,12 @@ public class OrderService {
 			
 			if (singleItem.getQuantity() < 1) {
 				context.setRollbackOnly();
-				throw new InvalidQuantity("Invalid quantity ordered.");
+				throw new InvalidQuantity("Product quantity must be greater than 1");
 			}
 			
 			if (singleItem.getQuantity() > singleItem.getProduct().getUnitsInStock() ) {
 				context.setRollbackOnly();
-				throw new NoOrderDetail("Not enough stock for quantity ordered.");
+				throw new NoOrderDetail("Insufficient stock for quantity requested");
 			}
 			
 			OrderDetailPK primaryKey = new OrderDetailPK();

@@ -1,0 +1,1 @@
+Put your entity and problem domain classes in this package.

@@ -54,7 +54,6 @@ public class POSController implements Serializable {
 	
 	private boolean shippingAddressCheckbox;
 	
-	@SuppressWarnings("cdi-ambiguous-dependency")
 	@Inject
 	ProductService productService;
 	
@@ -79,16 +78,16 @@ public class POSController implements Serializable {
 	
 	public void addProductToCart() {
 		OrderDetail currentDetail = new OrderDetail();
-		Product detailProduct = productService.findOne(currentProductId);
+		Product productDetail = productService.findOne(currentProductId);
 		
-		if (detailProduct == null || detailProduct.getDiscontinued() == 't') {
+		if (productDetail == null || productDetail.getDiscontinued() == 't') {
 			Messages.addGlobalWarn("{0} is not a valid ProductID.", currentProductId);
 			
 			
 		} else {
 			
-			currentDetail.setProduct(detailProduct);
-			currentDetail.setUnitPrice(detailProduct.getUnitPrice());
+			currentDetail.setProduct(productDetail);
+			currentDetail.setUnitPrice(productDetail.getUnitPrice());
 			currentDetail.setDiscount(0.00);
 			currentDetail.setQuantity((short)1);
 	
@@ -103,7 +102,6 @@ public class POSController implements Serializable {
 		}
 	}
 	
-	@SuppressWarnings("cdi-ambiguous-dependency")
 	@Inject
 	OrderService orderService;
 
