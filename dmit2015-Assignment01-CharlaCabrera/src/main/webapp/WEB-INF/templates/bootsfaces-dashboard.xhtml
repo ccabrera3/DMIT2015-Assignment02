@@ -64,6 +64,15 @@
                 <b:navLink value="Profile" href="#"></b:navLink>
                 <b:navLink value="Help" href="#"></b:navLink> -->
             </b:navbarLinks>
+            
+            <b:form>  
+		        <b:navbarLinks pull="right">
+		        	<b:navLink value="Sign In" outcome="/public/login.xhtml" rendered="#{not sessionController.loggedIn}"></b:navLink>  
+		        			        	
+		       		<b:navCommandLink value="Logout #{sessionController.remoteUser}" action="#{sessionController.logout()}" 
+		       			rendered="#{sessionController.loggedIn}"></b:navCommandLink>	        
+				</b:navbarLinks>
+			</b:form>
         </b:navBar>
 
         <b:container fluid="true">

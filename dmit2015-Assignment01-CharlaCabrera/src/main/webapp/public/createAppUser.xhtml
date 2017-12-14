@@ -1,0 +1,64 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Create App User" />
+
+	<ui:define name="maincontent">
+		<b:jumbotron>
+			<h1>Enter App User Details</h1>
+		</b:jumbotron>
+		
+		<b:messages id="messages" />
+		
+		<h:form>
+			<b:dataTable value="#{createAppUserController.allAppUsers}" var="user"
+				searching="false">
+				<b:dataTableColumn value="#{user.loginName}" />
+				<b:dataTableColumn value="#{user.password}" />
+				<b:dataTableColumn label="Roles">
+					<ui:repeat var="userRole" value="#{user.appUserRoles}">
+						#{userRole.id.roleName}
+					</ui:repeat>
+				</b:dataTableColumn>				
+			</b:dataTable>
+		
+			<b:inputText id="loginName" 
+				label="loginName"
+				value="#{createAppUserController.currentAppUser.loginName}">
+				<b:focus />
+			</b:inputText>
+			
+			<b:inputText id="password" 
+				label="password"
+				value="#{createAppUserController.password}"
+				type="password">
+			</b:inputText>
+						
+			<p>Role Name</p>
+			<b:radiobutton value="#{createAppUserController.selectedRoleName}">
+				<f:selectItems value="#{createAppUserController.appRoleNames}" var="roleName"
+					itemValue="#{roleName}" itemLabel="#{roleName}" />
+			</b:radiobutton>
+						
+			<b:commandButton value="Create User" 	
+				look="primary"
+				actionListener="#{createAppUserController.createUser()}">
+			</b:commandButton>
+			
+		</h:form>
+				
+	</ui:define>
+
+</ui:composition>

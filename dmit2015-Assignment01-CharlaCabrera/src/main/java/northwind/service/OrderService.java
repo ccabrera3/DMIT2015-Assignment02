@@ -8,16 +8,23 @@ import northwind.exception.NoOrderDetail;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJBContext;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.jboss.ejb3.annotation.SecurityDomain;
 
 import northwind.model.Order;
 import northwind.model.OrderDetail;
 import northwind.model.OrderDetailPK;
 
+@Stateful
+@SecurityDomain("northwindDomain")
+@DeclareRoles({"Administrator","Employee","Customer"})
 @Stateless
 public class OrderService {
 	
@@ -28,6 +35,7 @@ public class OrderService {
 	@Inject
 	private EntityManager entityManager;
 
+	@PermitAll
 	public int createNewOrder(Order newOrder, List<OrderDetail> products) 
 			throws InvalidQuantity, StockException, NoOrderDetail {
 		

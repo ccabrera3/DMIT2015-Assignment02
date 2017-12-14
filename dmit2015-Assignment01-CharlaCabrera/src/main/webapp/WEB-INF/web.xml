@@ -16,4 +16,86 @@
   <welcome-file-list>
     <welcome-file>/index.xhtml</welcome-file>
   </welcome-file-list>
+  <security-constraint>
+		<display-name>Use HTTPS only</display-name>
+		<web-resource-collection>
+			<web-resource-name>sslResources</web-resource-name>
+			<url-pattern>/</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+<security-constraint>
+		<display-name>Administrator Area</display-name>
+		<web-resource-collection>
+			<web-resource-name>Administrator Resources</web-resource-name>
+			<url-pattern>/public/CreateCategory.xhtml</url-pattern>
+			<url-pattern>/public/report/CategorySales.xhtml</url-pattern>
+			<url-pattern>/public/report/MonthlySalesByYear.xhtml</url-pattern>
+			<url-pattern>/public/report/TopTen.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Administrator</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Employee Area</display-name>
+		<web-resource-collection>
+			<web-resource-name>Employee Resources</web-resource-name>
+			<url-pattern>/public/PointOfSales.xhtml</url-pattern>
+			<url-pattern>/public/findSalesInvoiceByOrderId.xhtml</url-pattern>
+			<url-pattern>/public/report/CategorySales.xhtml</url-pattern>
+			<url-pattern>/public/report/MonthlySalesByYear.xhtml</url-pattern>
+			<url-pattern>/public/report/TopTen.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Administrator</role-name>
+			<role-name>Employee</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<display-name>Customer Area</display-name>
+		<web-resource-collection>
+			<web-resource-name>Customer Resources</web-resource-name>
+			<url-pattern>/protected/changePassword.xhtml</url-pattern>
+			<url-pattern>/protected/dashboard.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Administrator</role-name>
+			<role-name>Employee</role-name>
+			<role-name>Customer</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-role>
+		<role-name>Administrator</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>Employee</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>Customer</role-name>
+	</security-role>
+
+
+	<!-- Configure Authentication Method for Container-Managed Security -->
+	<login-config>
+		<!-- auth-method: NONE, BASIC, DIGEST, FORM -->
+		<auth-method>FORM</auth-method>
+		<realm-name>northwindDomain</realm-name>
+		<form-login-config>
+			<form-login-page>/public/login.xhtml</form-login-page>
+			<form-error-page>/public/login.xhtml?error=true</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+
+  
+	
+	
 </web-app>
