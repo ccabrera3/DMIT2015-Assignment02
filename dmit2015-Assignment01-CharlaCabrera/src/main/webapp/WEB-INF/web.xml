@@ -96,6 +96,19 @@
 	
 
   
+	<error-page>
+		<error-code>401</error-code>
+		<location>/public/error401.xhtml</location>
+	</error-page>
 	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/public/error403.xhtml</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/public/error404.xhtml</location>
+	</error-page>
 	
 </web-app>

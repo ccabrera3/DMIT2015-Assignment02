@@ -22,7 +22,7 @@ import northwind.model.Order;
 import northwind.model.OrderDetail;
 import northwind.model.OrderDetailPK;
 
-@Stateful
+
 @SecurityDomain("northwindDomain")
 @DeclareRoles({"Administrator","Employee","Customer"})
 @Stateless
