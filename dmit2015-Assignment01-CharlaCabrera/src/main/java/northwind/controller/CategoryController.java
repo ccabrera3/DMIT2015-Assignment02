@@ -18,7 +18,6 @@ import northwind.report.CategorySales;
 import northwind.service.CategoryService;
 @Model
 public class CategoryController {
-	//CHARLACCACBBA
 	
 	private Part uploadedFile;
 	@Inject
