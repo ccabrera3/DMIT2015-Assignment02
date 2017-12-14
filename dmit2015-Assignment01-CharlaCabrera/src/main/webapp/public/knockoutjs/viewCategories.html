@@ -33,7 +33,7 @@
 		</thead>
 		<tbody data-bind="foreach: categories">
 			<tr>
-				<td data-bind="text: categoryId"></td>
+				<td data-bind="text: categoryID"></td>
 				<td data-bind="text: categoryName"></td>
 				<td data-bind="text: description"></td>
 				<td><a href="#" class="btn" data-bind="click: $parent.editCategory"><span class="glyphicon glyphicon-edit"></span>  edit</a></td>
@@ -45,7 +45,7 @@
 <script>
 function Category(data) {
 	var self = this;
-	self.categoryId = ko.observable(data.categoryId);
+	self.categoryID = ko.observable(data.categoryID);
 	self.categoryName = data.categoryName;
 	self.description = data.description;
 }
@@ -61,7 +61,7 @@ function CategoriesViewModel() {
 	});
 	
 	self.editCategory = function(category) {
-		var url = "editCategory.html?categoryId=" + category.categoryId();
+		var url = "editCategory.html?categoryID=" + category.categoryID();
 		window.location.replace(url);
 	};
 }

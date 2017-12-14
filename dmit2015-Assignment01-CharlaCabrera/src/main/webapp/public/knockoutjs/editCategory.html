@@ -27,7 +27,7 @@
         <div class="panel-body">
             <div class="form-group">
                 <label>Category ID</label>
-                <span class="form-control" data-bind="text: categoryId"></span>
+                <span class="form-control" data-bind="text: categoryID"></span>
             </div>
             <div class="form-group">
                 <label>Name</label>
@@ -63,7 +63,7 @@ function handleCancelClick() {
 
 function Category(data) {
 	var self = this;
-	self.categoryId = ko.observable(data.categoryId);
+	self.categoryID = ko.observable(data.categoryID);
 	self.categoryName = data.categoryName;
 	self.description = data.description;
 	
@@ -71,13 +71,13 @@ function Category(data) {
 
 function CategoryViewModel() {
 	var self = this;
-	var categoryIdParameterValue = getParameterByName("categoryId");
+	var categoryIDParameterValue = getParameterByName("categoryID");
 	//alert( genreIdParameterValue );
-	self.categoryId = ko.observable(categoryIdParameterValue);
+	self.categoryID = ko.observable(categoryIDParameterValue);
 	self.categoryName = ko.observable("");
 	self.description = ko.observable("");
 
-	var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories/" + categoryIdParameterValue;
+	var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories/" + categoryIDParameterValue;
 	$.ajax(northwindAPI, {
 		//data: ko.toJSON( genreIdParameterValue ),
 		type: "GET",
@@ -92,7 +92,7 @@ function CategoryViewModel() {
 	});
 	
 	self.editCategory = function(category) {
-		var url = "editCategory.html?categoryId=" + category.categoryId();
+		var url = "editCategory.html?categoryID=" + category.categoryID();
 		window.location.replace(url);
 	}
 	
@@ -102,7 +102,7 @@ function CategoryViewModel() {
 		var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories";
 		
 		$.ajax(northwindAPI, {
-			data: ko.toJSON( {categoryId: self.categoryId(), categoryName: self.categoryName(), description: self.description() } ),
+			data: ko.toJSON( {categoryID: self.categoryID(), categoryName: self.categoryName(), description: self.description() } ),
 			type: "PUT",
 			contentType: "application/json",
 			success: function(result) { 
@@ -119,7 +119,7 @@ function CategoryViewModel() {
 	self.deleteCategory = function() {
 		var result = confirm("Are you sure you want to delete this record?")
 		if (result == true ) {
-			var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories/" + self.categoryId();
+			var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories/" + self.categoryID();
 			$.ajax(northwindAPI, {
 				//data: ko.toJSON( self.genreId() ),
 				type: "DELETE",
