@@ -20,12 +20,14 @@
 	<h2>Category Listings</h2>
 	
 	<a href="createCategory.html" class="btn btn-primary">Create Category</a>
+	<br/>
 	
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>CategoryID</th>
 				<th>Category Name</th>
+				<th>Description</th>
 				<th>Action</th>
 			</tr>	
 		</thead>
@@ -33,6 +35,7 @@
 			<tr>
 				<td data-bind="text: categoryId"></td>
 				<td data-bind="text: categoryName"></td>
+				<td data-bind="text: description"></td>
 				<td><a href="#" class="btn" data-bind="click: $parent.editCategory"><span class="glyphicon glyphicon-edit"></span>  edit</a></td>
 			</tr>	
 		</tbody>
@@ -44,6 +47,7 @@ function Category(data) {
 	var self = this;
 	self.categoryId = ko.observable(data.categoryId);
 	self.categoryName = data.categoryName;
+	self.description = data.description;
 }
 
 function CategoriesViewModel() {

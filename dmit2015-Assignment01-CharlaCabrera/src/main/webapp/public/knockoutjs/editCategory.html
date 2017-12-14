@@ -61,6 +61,8 @@ function Category(data) {
 	var self = this;
 	self.categoryId = ko.observable(data.categoryId);
 	self.categoryName = data.categoryName;
+	self.description = data.description;
+	
 }
 
 function CategoryViewModel() {
@@ -69,6 +71,7 @@ function CategoryViewModel() {
 	//alert( genreIdParameterValue );
 	self.categoryId = ko.observable(categoryIdParameterValue);
 	self.categoryName = ko.observable("");
+	self.description = ko.observable("");
 
 	var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories/" + categoryIdParameterValue;
 	$.ajax(northwindAPI, {
@@ -94,7 +97,7 @@ function CategoryViewModel() {
 		var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories";
 		
 		$.ajax(northwindAPI, {
-			data: ko.toJSON( {categoryId: self.categoryId(), categoryName: self.categoryName() } ),
+			data: ko.toJSON( {categoryId: self.categoryId(), categoryName: self.categoryName(), description: self.description() } ),
 			type: "PUT",
 			contentType: "application/json",
 			success: function(result) { 

@@ -43,21 +43,24 @@ function handleCancelClick() {
 function Category(data) {
 	var self = this;
 	self.categoryName = data.categoryName;
+	self.description = data.description;
 }
 
 function CategoryViewModel() {
 	var self = this;
 	self.categoryName = ko.observable("");
+	self.description = ko.observable("");
 	
 	self.createCategory = function() {		
 		var northwindAPI = "/dmit2015-Assignment05-CharlaCabrera/rest/webapi/categories";		
 		$.ajax(northwindAPI, {
-			data: ko.toJSON( { categoryName: self.categoryName() } ),
+			data: ko.toJSON( { categoryName: self.categoryName(), description: self.description()} ),
 			type: "POST",
 			contentType: "application/json",
 			success: function(result) { 
 				alert('Successfully created new category'); 
 				self.categoryName("");
+				self.description("");
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert('Error creating new category');

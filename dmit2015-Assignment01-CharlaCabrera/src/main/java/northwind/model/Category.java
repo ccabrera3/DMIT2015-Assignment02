@@ -2,6 +2,10 @@ package northwind.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.List;
 
 
@@ -9,6 +13,7 @@ import java.util.List;
  * The persistent class for the Categories database table.
  * 
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="Categories")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
@@ -31,6 +36,7 @@ public class Category implements Serializable {
 	@Column(name="Picture")
 	private byte[] picture;
 
+	@XmlTransient
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="category")
 	private List<Product> products;
